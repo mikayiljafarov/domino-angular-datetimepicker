@@ -1,0 +1,35 @@
+<div class="datepicker">
+    <div (click)="showCalendar()" class="datepicker__input-container">
+        <ng-content></ng-content>
+    </div>
+    <div class="datepicker__calendar datepicker__calendar_animate_slide-in" *ngIf="calendarVisible">
+        <div class="datepicker__calendar-controls">
+            <a href="#" (click)="selectPreviousMonth(monthSelector, yearSelector)" class="datepicker__previous-month-control"><</a>
+
+            <select #monthSelector [value]="selectedMonth" name="month" id="month" (change)="callbackMonthChanged($event.target.value)">
+                <option *ngFor="let month of months" [value]="month">{{month}}</option>
+            </select>
+
+            <select #yearSelector [value]="selectedYear" name="year" id="year" (change)="callbackYearChanged($event.target.value)">
+                <option *ngFor="let year of years" [value]="year">{{year}}</option>
+            </select>
+
+            <a href="#" (click)="selectNextMonth(monthSelector, yearSelector)" class="datepicker__next-month-control">></a>
+        </div>
+
+        <ul class="datepicker__days">
+            <li class="datepicker__block datepicker__weekday"
+                *ngFor="let weekday of weekdays">
+                {{weekday}}
+            </li>
+            <li class="datepicker__block datepicker__day"
+                *ngFor="let day of days"
+                (click)="selectDate(day)"
+                [ngClass]="{'datepicker__day_faded': day.status == 'previousMonth' || day.status == 'nextMonth',
+                            'datepicker__day_selected': day.fullDate == selectedDay?.fullDate,
+                            'datepicker__day_disabled': day.year < startYear || day.year > endYear }">
+                {{day.date}}
+            </li>
+        </ul>
+    </div>
+</div>
