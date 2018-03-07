@@ -1,5 +1,5 @@
 # domino-angular-datetimepicker
-Development Branch 
+Master Branch 
 ------------------------------------------------------------------------- 
 Date time picker component  for Angular 5
 -------------------------------------------------------------------------
